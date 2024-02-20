@@ -1,4 +1,4 @@
-import { type Note } from "../types/index";
+import { type Note, NoteSchema } from "../types/index";
 
 const notes: Note[] = [];
 
@@ -9,6 +9,7 @@ export function createNote({ title, body }: Note): Note {
     body,
   };
 
+  NoteSchema.parse(newNote);
   notes.push(newNote);
 
   return newNote;
@@ -18,17 +19,17 @@ export function getNotes(): Note[] {
   return notes;
 }
 
-export function getNote(id: number): Note | null {
+export function getNote(id: number): Note | string {
   for (const note of notes) {
     if (note.id === id) {
       return note;
     }
   }
 
-  return null;
+  return "Note not found.";
 }
 
-export function updateNote({ id, title, body }: Note): Note | null {
+export function updateNote({ id, title, body }: Note): Note | string {
   let updateNote: Note = {
     id: 0,
     title: "",
@@ -47,17 +48,22 @@ export function updateNote({ id, title, body }: Note): Note | null {
     return updateNote;
   }
 
-  return null;
+  return "Note not found. Cannot update.";
 }
 
-export function deleteNote(id: number): string {
-  let result: string = "Note not found.";
+export function deleteNote(id: number): { message: string; status: number } {
+  const result = {
+    message: "Note not found. Cannot delete.",
+    status: 404,
+  };
+
   let index: number = 0;
 
   notes.forEach((note, idx) => {
     if (note.id === id) {
       index = idx;
-      result = `Note with ${id} deleted.`;
+      result.message = `Note with ${id} deleted.`;
+      result.status = 200;
     }
   });
 
