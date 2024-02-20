@@ -63,7 +63,7 @@ export function deleteNote(id: number): { message: string; status: number } {
   notes.forEach((note, idx) => {
     if (note.id === id) {
       index = idx;
-      result.message = `Note with ${id} deleted.`;
+      result.message = `Note with ID ${id} deleted.`;
       result.status = 200;
     }
   });
