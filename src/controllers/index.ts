@@ -17,7 +17,7 @@ export function createNote(
     next();
   } catch (e: any) {
     res.status(400).json({
-      error: e.issues[0].message || e,
+      error: e.issues[0].path[0] + " " + e.issues[0].message || e,
     });
   }
 }
@@ -79,9 +79,9 @@ export function updateNotes(
         ...result,
       });
     }
-  } catch (e) {
+  } catch (e: any) {
     res.status(400).json({
-      error: e,
+      error: e.issues[0].path[0] + " " + e.issues[0].message || e,
     });
   }
 }

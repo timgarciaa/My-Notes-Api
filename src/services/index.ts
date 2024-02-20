@@ -30,7 +30,7 @@ export function getNote(id: number): Note | string {
 }
 
 export function updateNote({ id, title, body }: Note): Note | string {
-  let updateNote: Note = {
+  let updatedNote: Note = {
     id: 0,
     title: "",
     body: "",
@@ -40,12 +40,13 @@ export function updateNote({ id, title, body }: Note): Note | string {
       notes[index].title = title;
       notes[index].body = body;
 
-      updateNote = notes[index];
+      updatedNote = notes[index];
     }
   });
 
-  if (updateNote.id !== 0) {
-    return updateNote;
+  if (updatedNote.id !== 0) {
+    NoteSchema.parse(updatedNote);
+    return updatedNote;
   }
 
   return "Note not found. Cannot update.";
