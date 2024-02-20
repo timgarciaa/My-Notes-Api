@@ -23,14 +23,12 @@
 1. **Create a new note**
 
    ```bash
-   curl  -X POST \
-     'http://localhost:7001/notes' \
-     --header 'Accept: */*' \
-     --header 'Content-Type: application/json' \
-     --data-raw '{
-     "title": "MY Test Note",
-     "body": "my test notes body"
-   }'
+   curl  -X POST 'http://localhost:7001/notes' \
+      --header 'Accept: */*' --header 'Content-Type: application/json' \
+      --data-raw '{
+         "title": "MY Test Note",
+         "body": "my test notes body"
+      }'
    ```
 
 2. **Retrieve all notes**
@@ -49,13 +47,13 @@
 
    ```bash
    curl  -X PUT \
-     'http://localhost:7001/notes/1' \
-     --header 'Accept: */*' \
-     --header 'Content-Type: application/json' \
-     --data-raw '{
-     "title": "My Test Note Updated",
-     "description": "My test notes body updated"
-   }'
+      'http://localhost:7001/notes/1' \
+      --header 'Accept: */*' \
+      --header 'Content-Type: application/json' \
+      --data-raw '{
+         "title": "My Test Note Updated",
+         "body": "My test notes body updated"
+      }'
    ```
 
 5. **Delete a specific note**
